@@ -120,3 +120,59 @@ Output goes to `website-agent/output/<dir>/index.html` — open directly in a br
 ## Skills installed (`.claude/skills/`)
 
 `banner-design`, `brand`, `design`, `design-system`, `slides`, `ui-styling`, `ui-ux-pro-max`
+
+---
+
+## الملفات المرتبطة (File Dependencies)
+
+قاعدة: قبل أي تعديل راجع الملفات المرتبطة أولاً.
+
+### إذا عدّلت `animations.js`
+أثّر على كل الأجزاء — راجع:
+- `src/sections/Hero.jsx` — يستخدم `staggerContainer`, `staggerItem`
+- `src/sections/Features.jsx` — يستخدم `staggerContainer`, `staggerItem`, `fadeUp`, `viewport`
+- `src/sections/Work.jsx` — يستخدم `fadeUp`, `fadeLeft`, `fadeRight`, `scaleIn`, `staggerContainer`, `staggerItem`, `viewport`
+- `src/sections/Testimonials.jsx` — يستخدم `fadeUp`, `viewport`
+- `src/sections/CTA.jsx` — يستخدم `scaleIn`, `staggerContainer`, `staggerItem`, `viewport`
+
+### إذا عدّلت `index.css`
+- يؤثر على كل المشروع (reset + dark theme + font)
+- راجع: `src/main.jsx` (نقطة استيراده)
+
+### إذا عدّلت `App.jsx`
+- راجع: كل ملفات `src/sections/` و `src/components/Nav.jsx`
+- ترتيب الأقسام: Nav → Hero → Features → Work → Testimonials → CTA
+
+### إذا عدّلت `Nav.jsx`
+- مستقل — لا يستورد من sections
+- يعتمد على: `framer-motion` فقط (scroll-driven animation)
+
+---
+
+## قرارات المشروع (Decisions Log)
+
+سجل للقرارات التقنية المهمة — لا تعيد النقاش، نفّذ مباشرة.
+
+### التنظيم العام
+- **قرار:** `animations.js` مصدر واحد لكل variants — لا تكتب variants داخل الكومبوننت
+- **قرار:** CSS داخل كل component كـ template literal (`const css = \`...\``) — لا ملفات CSS منفصلة لكل section
+- **قرار:** design tokens محفوظة كـ CSS variables أو inline styles — لا مكتبة خارجية للـ theming
+
+### website-agent
+- **قرار:** الـ model هو `claude-sonnet-4-6` — يمكن تغييره في `generate_website()`
+- **قرار:** الحد الأقصى 24 iteration — كافي، معظم المواقع تنتهي في 3–6
+- **قرار:** `Path(filename).name` يمنع path traversal — لا تزيله
+
+### مستقبلاً (خطوات مقررة لم تُنفَّذ بعد)
+- فصل المشروعين إلى ريبوهات مستقلة: `studio-site` و `website-agent`
+- إنشاء `main` branch وتعيينه كـ default بدلاً من `claude/add-skills-feature-P9NQA`
+- تغيير اسم الريبو من `-B` إلى اسم واضح
+
+---
+
+## كيف تضيف محادثة جديدة لهذا الملف
+
+1. بعد أي محادثة مفيدة — لا تحفظ المحادثة كاملة
+2. استخرج القرار أو الدرس في جملة واحدة
+3. أضفه تحت القسم المناسب أعلاه
+4. مثال: `- **قرار:** استخدم ease [0.22, 1, 0.36, 1] بدل easeOut على العناصر الكبيرة`
