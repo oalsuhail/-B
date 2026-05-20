@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 
-const links = ['Features', 'Work', 'Testimonials']
+const links = ['Features', 'Work', 'Routines', 'Testimonials']
 
 export default function Nav() {
   const { scrollY } = useScroll()
