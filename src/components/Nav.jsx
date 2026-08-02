@@ -1,98 +1,94 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { BrandMark, IconClose, IconMenu, IconPhone } from './Icons'
 
-const links = ['Features', 'Work', 'Testimonials']
+const links = [
+  { href: '#services', label: 'Services' },
+  { href: '#process', label: 'Process' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#why-us', label: 'Why Us' },
+  { href: '#testimonials', label: 'Testimonials' },
+  { href: '#contact', label: 'Contact' },
+]
+
+const PHONE = '+1 (555) 010-2020'
 
 export default function Nav() {
   const { scrollY } = useScroll()
-  const bg = useTransform(scrollY, [0, 60], ['rgba(10,10,15,0)', 'rgba(10,10,15,0.95)'])
-  const borderOpacity = useTransform(scrollY, [0, 60], [0, 1])
+  const bg = useTransform(scrollY, [0, 60], ['rgba(11,18,32,0)', 'rgba(11,18,32,0.96)'])
+  const borderColor = useTransform(scrollY, [0, 60], ['rgba(36,48,74,0)', 'rgba(36,48,74,1)'])
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
 
   return (
-    <motion.nav
-      style={{ background: bg }}
+    <motion.header
+      style={{ background: bg, borderBottom: '1px solid', borderColor }}
       className="nav"
     >
-      <style>{`
-        .nav {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 100;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 1rem 2.5rem;
-          backdrop-filter: blur(12px);
-          border-bottom: 1px solid rgba(124, 58, 237, 0);
-          transition: border-color 0.3s;
-        }
-        .nav-logo {
-          font-weight: 700;
-          font-size: 1.25rem;
-          background: linear-gradient(135deg, #a78bfa, #7c3aed);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-        .nav-links {
-          display: flex;
-          gap: 2rem;
-          list-style: none;
-        }
-        .nav-links a {
-          color: #94a3b8;
-          text-decoration: none;
-          font-size: 0.9rem;
-          font-weight: 500;
-          transition: color 0.2s;
-        }
-        .nav-links a:hover { color: #e2e8f0; }
-        .nav-cta {
-          padding: 0.5rem 1.25rem;
-          background: #7c3aed;
-          color: #fff;
-          border: none;
-          border-radius: 8px;
-          font-size: 0.875rem;
-          font-weight: 600;
-          cursor: pointer;
-          font-family: inherit;
-        }
-      `}</style>
+      <div className="nav-inner">
+        <a href="#top" className="nav-logo" aria-label="ABC Company home">
+          <span className="nav-logo-mark" aria-hidden="true">
+            <BrandMark width={22} height={22} />
+          </span>
+          <span>
+            <span className="nav-logo-text">ABC Company</span>
+            <span className="nav-logo-sub">Design &amp; Construction</span>
+          </span>
+        </a>
 
-      <motion.span
-        className="nav-logo"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
-        Studio
-      </motion.span>
+        <nav className="nav-links" aria-label="Primary">
+          {links.map((l) => (
+            <a key={l.href} href={l.href}>
+              {l.label}
+            </a>
+          ))}
+        </nav>
 
-      <motion.ul
-        className="nav-links"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        {links.map((l) => (
-          <li key={l}>
-            <a href={`#${l.toLowerCase()}`}>{l}</a>
-          </li>
-        ))}
-      </motion.ul>
+        <div className="nav-actions">
+          <a className="nav-phone" href={`tel:${PHONE.replace(/[^+\d]/g, '')}`}>
+            <IconPhone width={18} height={18} />
+            {PHONE}
+          </a>
+          <a href="#contact" className="btn btn-primary">
+            Get a Quote
+          </a>
+        </div>
 
-      <motion.button
-        className="nav-cta"
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        whileHover={{ scale: 1.05, backgroundColor: '#6d28d9' }}
-        whileTap={{ scale: 0.97 }}
-      >
-        Get started
-      </motion.button>
-    </motion.nav>
+        <button
+          type="button"
+          className="icon-btn nav-toggle"
+          style={{ color: '#f8fafc', borderColor: 'rgba(248,250,252,0.25)' }}
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <IconClose /> : <IconMenu />}
+        </button>
+      </div>
+
+      <div id="mobile-menu" className={`nav-mobile ${open ? 'is-open' : ''}`}>
+        <div className="nav-mobile-inner">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+              {l.label}
+            </a>
+          ))}
+          <a className="nav-mobile-phone" href={`tel:${PHONE.replace(/[^+\d]/g, '')}`}>
+            <IconPhone width={18} height={18} />
+            {PHONE}
+          </a>
+          <a href="#contact" className="btn btn-primary btn-block" onClick={() => setOpen(false)}>
+            Get a Quote
+          </a>
+        </div>
+      </div>
+    </motion.header>
   )
 }
