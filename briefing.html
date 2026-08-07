@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Catch-Up Briefing — Aug 7, 2026</title>
+<style>
+  :root {
+    --bg: #edf1f1;
+    --surface: #ffffff;
+    --surface-2: #e3e8e9;
+    --border: #d2d9db;
+    --ink: #1a232b;
+    --ink-2: #4c5962;
+    --ink-3: #7d8a91;
+    --accent: #1b7fa3;
+    --accent-soft: #e2eef2;
+    --rust: #b45a2c;
+    --rust-soft: #f3e6dc;
+    --good: #0ca30c;
+    --good-soft: #e2f3e2;
+    --warning: #fab219;
+    --warning-ink: #8a5b0a;
+    --warning-soft: #fdf1da;
+    --critical: #d03b3b;
+    --critical-soft: #fbe6e6;
+    --font-display: Iowan Old Style, Palatino Linotype, Palatino, Georgia, serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14181b;
+      --surface: #1b2124;
+      --surface-2: #232a2e;
+      --border: #313a3e;
+      --ink: #edf0f0;
+      --ink-2: #b6c0c4;
+      --ink-3: #7d8a90;
+      --accent: #2c88ad;
+      --accent-soft: #1c3038;
+      --rust: #ba6935;
+      --rust-soft: #34281e;
+      --good: #0ca30c;
+      --good-soft: #16311a;
+      --warning: #fab219;
+      --warning-ink: #ffd27a;
+      --warning-soft: #3a2f16;
+      --critical: #d03b3b;
+      --critical-soft: #3a1c1c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14181b; --surface: #1b2124; --surface-2: #232a2e; --border: #313a3e;
+    --ink: #edf0f0; --ink-2: #b6c0c4; --ink-3: #7d8a90;
+    --accent: #2c88ad; --accent-soft: #1c3038;
+    --rust: #ba6935; --rust-soft: #34281e;
+    --good: #0ca30c; --good-soft: #16311a;
+    --warning: #fab219; --warning-ink: #ffd27a; --warning-soft: #3a2f16;
+    --critical: #d03b3b; --critical-soft: #3a1c1c;
+  }
+  :root[data-theme="light"] {
+    --bg: #edf1f1; --surface: #ffffff; --surface-2: #e3e8e9; --border: #d2d9db;
+    --ink: #1a232b; --ink-2: #4c5962; --ink-3: #7d8a91;
+    --accent: #1b7fa3; --accent-soft: #e2eef2;
+    --rust: #b45a2c; --rust-soft: #f3e6dc;
+    --good: #0ca30c; --good-soft: #e2f3e2;
+    --warning: #fab219; --warning-ink: #8a5b0a; --warning-soft: #fdf1da;
+    --critical: #d03b3b; --critical-soft: #fbe6e6;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  /* ---- Header ---- */
+  header.brief-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.6rem;
+    margin-bottom: 2.2rem;
+    flex-wrap: wrap;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.5rem;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 2.05rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .subhead {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    margin: 0.5rem 0 0;
+    max-width: 50ch;
+  }
+  .head-meta {
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-3);
+  }
+  .head-meta strong { color: var(--ink-2); font-weight: 600; display: block; }
+
+  /* ---- Stat tiles ---- */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.9rem;
+    margin-bottom: 2.6rem;
+  }
+  .stat-tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.15rem;
+  }
+  .stat-tile .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    display: inline-block; margin-right: 6px;
+  }
+  .stat-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    display: flex; align-items: center;
+    margin-bottom: 0.55rem;
+  }
+  .stat-value {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .stat-caption {
+    font-size: 0.76rem;
+    color: var(--ink-2);
+    margin-top: 0.5rem;
+  }
+
+  /* ---- Sections ---- */
+  section { margin-bottom: 2.6rem; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--ink);
+  }
+  .section-note {
+    font-size: 0.78rem;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+  }
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+  }
+
+  /* ---- Inbox composition chart ---- */
+  .comp-chart { display: flex; flex-direction: column; gap: 0.85rem; }
+  .comp-row { display: grid; grid-template-columns: 190px 1fr 64px; align-items: center; gap: 0.85rem; }
+  .comp-name { font-size: 0.84rem; color: var(--ink-2); }
+  .comp-track {
+    background: var(--surface-2);
+    border-radius: 5px;
+    height: 14px;
+    overflow: hidden;
+  }
+  .comp-fill { height: 100%; border-radius: 5px 0 0 5px; }
+  .comp-count {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.84rem;
+    color: var(--ink);
+    text-align: right;
+  }
+  .comp-footnote {
+    font-size: 0.78rem;
+    color: var(--ink-3);
+    margin-top: 1.1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border);
+  }
+
+  /* ---- PR debt chart ---- */
+  .scale-axis {
+    display: grid;
+    grid-template-columns: 226px 1fr 52px;
+    gap: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--ink-3);
+    margin-bottom: 0.5rem;
+  }
+  .scale-ticks { position: relative; height: 14px; }
+  .scale-ticks span { position: absolute; transform: translateX(-50%); }
+  .pr-chart { display: flex; flex-direction: column; gap: 0.62rem; }
+  .pr-row { display: grid; grid-template-columns: 226px 1fr 52px; align-items: center; gap: 0.85rem; }
+  .pr-label { font-size: 0.79rem; color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pr-label .num { font-family: var(--font-mono); color: var(--ink-3); margin-right: 0.4em; }
+  .pr-track {
+    position: relative;
+    background: var(--surface-2);
+    border-radius: 4px;
+    height: 12px;
+  }
+  .pr-track::before, .pr-track::after {
+    content: ''; position: absolute; top: -3px; bottom: -3px; width: 1px; background: var(--border);
+  }
+  .pr-fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 4px; }
+  .pr-days { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 0.78rem; color: var(--ink); text-align: right; }
+  .pr-legend { display: flex; gap: 1.4rem; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px dashed var(--border); flex-wrap: wrap; }
+  .pr-legend .item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.76rem; color: var(--ink-2); }
+  .pr-legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
+
+  /* ---- Advice ---- */
+  .advice-panel {
+    background: var(--rust-soft);
+    border: 1px solid var(--rust);
+    border-left-width: 4px;
+    border-radius: 10px;
+    padding: 1.5rem 1.6rem;
+  }
+  .advice-panel h2 { margin-bottom: 0.3rem; }
+  .advice-lede { font-size: 0.85rem; color: var(--ink-2); margin: 0 0 1.1rem; }
+  ol.advice-list {
+    list-style: none;
+    counter-reset: advice;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0.9rem;
+  }
+  ol.advice-list li {
+    counter-increment: advice;
+    display: grid;
+    grid-template-columns: 1.9rem 1fr;
+    gap: 0.7rem;
+  }
+  ol.advice-list li::before {
+    content: counter(advice);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--rust);
+    background: var(--surface);
+    border: 1px solid var(--rust);
+    border-radius: 50%;
+    width: 1.9rem; height: 1.9rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .advice-title { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+  .advice-body { font-size: 0.82rem; color: var(--ink-2); margin-top: 0.15rem; }
+  .did-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--good);
+    background: var(--good-soft);
+    border: 1px solid var(--good);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    margin-left: 0.5rem;
+  }
+  .warn-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--critical);
+    background: var(--critical-soft);
+    border: 1px solid var(--critical);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    margin-left: 0.5rem;
+  }
+
+  footer.brief-foot {
+    margin-top: 2.6rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-3);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 720px) {
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .comp-row, .pr-row, .scale-axis { grid-template-columns: 110px 1fr 46px; }
+    .pr-label { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="brief-head">
+    <div>
+      <p class="eyebrow">Catch-Up Briefing</p>
+      <h1>Still quiet up top. The queue underneath got a day older.</h1>
+      <p class="subhead">Calendar and inbox are unchanged from yesterday — the only thing that moved is how long the open PRs have been waiting.</p>
+    </div>
+    <div class="head-meta">
+      <strong>Friday, Aug 7 2026</strong>
+      oalsuhail@gmail.com<br>oalsuhail/-B
+    </div>
+  </header>
+
+  <div class="stat-row">
+    <div class="stat-tile">
+      <div class="stat-label"><span class="dot" style="background:var(--good)"></span>Meetings, next 2 weeks</div>
+      <div class="stat-value">0</div>
+      <div class="stat-caption">Calendar is empty through Aug 21.</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-label"><span class="dot" style="background:var(--good)"></span>Emails needing action</div>
+      <div class="stat-value">0 <span style="font-size:1rem;color:var(--ink-3)">/ 201</span></div>
+      <div class="stat-caption">Same unread count as yesterday — the 20 newest are all newsletters.</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-label"><span class="dot" style="background:var(--ink-3)"></span>Messages needing reply</div>
+      <div class="stat-value">—</div>
+      <div class="stat-caption">No chat workspace connected to check.</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-label"><span class="dot" style="background:var(--critical)"></span>Open draft PRs</div>
+      <div class="stat-value">10</div>
+      <div class="stat-caption">Oldest is 83 days old; none of the 7 flagged yesterday moved.</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <h2>Inbox signal</h2>
+      <span class="section-note">sample n = 45 of 201 unread</span>
+    </div>
+    <div class="panel">
+      <div class="comp-chart">
+        <div class="comp-row">
+          <span class="comp-name">Newsletters &amp; promo</span>
+          <div class="comp-track"><div class="comp-fill" style="width:36%; background:var(--accent)"></div></div>
+          <span class="comp-count">16</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-name">Expired verification codes</span>
+          <div class="comp-track"><div class="comp-fill" style="width:56%; background:var(--rust)"></div></div>
+          <span class="comp-count">25</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-name">Platform / ToS notices</span>
+          <div class="comp-track"><div class="comp-fill" style="width:7%; background:var(--ink-3)"></div></div>
+          <span class="comp-count">3</span>
+        </div>
+      </div>
+      <p class="comp-footnote">
+        Checked the 20 most recent unread threads plus all 25 flagged "important." The important pile is almost entirely expired sign-up codes and login alerts — 8 Discord verifications, 5 Apple ID codes, 3 PayPal, 2 n8n — several from 2015–2020. In the recent sample, <strong>Justyn.ca</strong> (8 of 20) and <strong>Emergent.sh</strong> (4 of 20) dominate, same as yesterday. Nothing in either sample needs a reply.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Project debt clock</h2>
+      <span class="section-note">oalsuhail/-B · days open</span>
+    </div>
+    <div class="panel">
+      <div class="scale-axis">
+        <span></span>
+        <div class="scale-ticks">
+          <span style="left:0%">0</span>
+          <span style="left:22%">20d</span>
+          <span style="left:44%">40d</span>
+          <span style="left:67%">60d</span>
+          <span style="left:100%; transform:translateX(-100%)">80d+</span>
+        </div>
+        <span></span>
+      </div>
+      <div class="pr-chart">
+        <div class="pr-row"><span class="pr-label"><span class="num">#1</span>Optimize chat sessions</span><div class="pr-track"><div class="pr-fill" style="width:92%; background:var(--critical)"></div></div><span class="pr-days">83d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#2</span>CLAUDE.md knowledge base</span><div class="pr-track"><div class="pr-fill" style="width:92%; background:var(--critical)"></div></div><span class="pr-days">83d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#3</span>RTK hook config</span><div class="pr-track"><div class="pr-fill" style="width:90%; background:var(--critical)"></div></div><span class="pr-days">81d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#4</span>Routines tabbed view</span><div class="pr-track"><div class="pr-fill" style="width:88%; background:var(--critical)"></div></div><span class="pr-days">79d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#5</span>shadcn/ui + Tailwind</span><div class="pr-track"><div class="pr-fill" style="width:88%; background:var(--critical)"></div></div><span class="pr-days">79d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#7</span>graphify repository</span><div class="pr-track"><div class="pr-fill" style="width:66%; background:var(--critical)"></div></div><span class="pr-days">59d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#8</span>21st.dev Magic MCP config</span><div class="pr-track"><div class="pr-fill" style="width:66%; background:var(--critical)"></div></div><span class="pr-days">59d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#10</span>scientific-agent-skills</span><div class="pr-track"><div class="pr-fill" style="width:42%; background:var(--warning)"></div></div><span class="pr-days">38d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#11</span>investment research dashboard</span><div class="pr-track"><div class="pr-fill" style="width:42%; background:var(--warning)"></div></div><span class="pr-days">38d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#13</span>ABC Company website</span><div class="pr-track"><div class="pr-fill" style="width:6%; background:var(--good)"></div></div><span class="pr-days">5d</span></div>
+      </div>
+      <div class="pr-legend">
+        <span class="item"><span class="swatch" style="background:var(--good)"></span>fresh, &lt;14d</span>
+        <span class="item"><span class="swatch" style="background:var(--warning)"></span>aging, 14–45d</span>
+        <span class="item"><span class="swatch" style="background:var(--critical)"></span>stale, &gt;45d</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="advice-panel">
+    <h2>How to handle it</h2>
+    <p class="advice-lede">Yesterday's briefing recommended a batch-triage sweep on #1, #2, #3, #4, #5, #7, #8. None of them moved — they're just a day older now. This run closed the one loop it could close on its own.</p>
+    <ol class="advice-list">
+      <li>
+        <div>
+          <div class="advice-title">Closed yesterday's briefing PR<span class="did-tag">done this run</span></div>
+          <div class="advice-body">PR #14 (Aug 6 briefing) is superseded by this one; closed it directly instead of stacking a second open dashboard PR, matching how #6/#9/#12 were handled before.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="advice-title">The 7-PR batch-triage is now overdue twice<span class="warn-tag">unactioned</span></div>
+          <div class="advice-body">#1, #2, #3, #4, #5, #7, #8 sit at 59–83 days with no merge or close since they were first flagged. A single sweep — merge what's done (CLAUDE.md, RTK hooks, shadcn/ui setup look ready), close what was exploratory — is still the fastest way to shrink this list.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="advice-title">#10 and #11 cross into stale territory around day 45</div>
+          <div class="advice-body">Both are 38 days old and amber today. Without a decision in the next week, they join the critical row exactly like #7 and #8 did.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="advice-title">Unsubscribing still beats triaging</div>
+          <div class="advice-body">Justyn.ca and Emergent.sh account for 12 of the last 20 unread, same senders as yesterday. One unsubscribe click each is cheaper than another daily archive pass.</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <footer class="brief-foot">
+    <span>Sources: Gmail · Google Calendar · GitHub (oalsuhail/-B) · generated by Claude</span>
+    <span>Next run picks up wherever this leaves off</span>
+  </footer>
+
+</div>
+</body>
+</html>
