@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Catch-Up Briefing — Sep 17, 2026</title>
+<style>
+  :root {
+    --bg: #edf1f1;
+    --surface: #ffffff;
+    --surface-2: #e3e8e9;
+    --border: #d2d9db;
+    --ink: #1a232b;
+    --ink-2: #4c5962;
+    --ink-3: #7d8a91;
+    --accent: #1b7fa3;
+    --accent-soft: #e2eef2;
+    --rust: #b45a2c;
+    --rust-soft: #f3e6dc;
+    --good: #0ca30c;
+    --good-soft: #e2f3e2;
+    --warning: #fab219;
+    --warning-ink: #8a5b0a;
+    --warning-soft: #fdf1da;
+    --critical: #d03b3b;
+    --critical-soft: #fbe6e6;
+    --font-display: Iowan Old Style, Palatino Linotype, Palatino, Georgia, serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14181b;
+      --surface: #1b2124;
+      --surface-2: #232a2e;
+      --border: #313a3e;
+      --ink: #edf0f0;
+      --ink-2: #b6c0c4;
+      --ink-3: #7d8a90;
+      --accent: #2c88ad;
+      --accent-soft: #1c3038;
+      --rust: #ba6935;
+      --rust-soft: #34281e;
+      --good: #0ca30c;
+      --good-soft: #16311a;
+      --warning: #fab219;
+      --warning-ink: #ffd27a;
+      --warning-soft: #3a2f16;
+      --critical: #d03b3b;
+      --critical-soft: #3a1c1c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14181b; --surface: #1b2124; --surface-2: #232a2e; --border: #313a3e;
+    --ink: #edf0f0; --ink-2: #b6c0c4; --ink-3: #7d8a90;
+    --accent: #2c88ad; --accent-soft: #1c3038;
+    --rust: #ba6935; --rust-soft: #34281e;
+    --good: #0ca30c; --good-soft: #16311a;
+    --warning: #fab219; --warning-ink: #ffd27a; --warning-soft: #3a2f16;
+    --critical: #d03b3b; --critical-soft: #3a1c1c;
+  }
+  :root[data-theme="light"] {
+    --bg: #edf1f1; --surface: #ffffff; --surface-2: #e3e8e9; --border: #d2d9db;
+    --ink: #1a232b; --ink-2: #4c5962; --ink-3: #7d8a91;
+    --accent: #1b7fa3; --accent-soft: #e2eef2;
+    --rust: #b45a2c; --rust-soft: #f3e6dc;
+    --good: #0ca30c; --good-soft: #e2f3e2;
+    --warning: #fab219; --warning-ink: #8a5b0a; --warning-soft: #fdf1da;
+    --critical: #d03b3b; --critical-soft: #fbe6e6;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+  body {
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  header.brief-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.6rem;
+    margin-bottom: 2.2rem;
+    flex-wrap: wrap;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.5rem;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 2.05rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .subhead {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    margin: 0.5rem 0 0;
+    max-width: 62ch;
+  }
+  .head-meta {
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-3);
+  }
+  .head-meta strong { color: var(--ink-2); font-weight: 600; display: block; }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.9rem;
+    margin-bottom: 2.6rem;
+  }
+  .stat-tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.15rem;
+  }
+  .stat-tile .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    display: inline-block; margin-right: 6px;
+  }
+  .stat-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    display: flex; align-items: center;
+    margin-bottom: 0.55rem;
+  }
+  .stat-value {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .stat-caption {
+    font-size: 0.76rem;
+    color: var(--ink-2);
+    margin-top: 0.5rem;
+  }
+
+  section { margin-bottom: 2.6rem; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--ink);
+  }
+  .section-note {
+    font-size: 0.78rem;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
+  }
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+  }
+
+  .comp-chart { display: flex; flex-direction: column; gap: 0.85rem; }
+  .comp-row { display: grid; grid-template-columns: 190px 1fr 64px; align-items: center; gap: 0.85rem; }
+  .comp-name { font-size: 0.84rem; color: var(--ink-2); }
+  .comp-track {
+    background: var(--surface-2);
+    border-radius: 5px;
+    height: 14px;
+    overflow: hidden;
+  }
+  .comp-fill { height: 100%; border-radius: 5px 0 0 5px; }
+  .comp-count {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.84rem;
+    color: var(--ink);
+    text-align: right;
+  }
+  .comp-footnote {
+    font-size: 0.78rem;
+    color: var(--ink-3);
+    margin-top: 1.1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border);
+  }
+
+  .scale-axis {
+    display: grid;
+    grid-template-columns: 226px 1fr 52px;
+    gap: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--ink-3);
+    margin-bottom: 0.5rem;
+  }
+  .scale-ticks { position: relative; height: 14px; }
+  .scale-ticks span { position: absolute; transform: translateX(-50%); }
+  .pr-chart { display: flex; flex-direction: column; gap: 0.62rem; }
+  .pr-row { display: grid; grid-template-columns: 226px 1fr 52px; align-items: center; gap: 0.85rem; }
+  .pr-label { font-size: 0.79rem; color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pr-label .num { font-family: var(--font-mono); color: var(--ink-3); margin-right: 0.4em; }
+  .pr-track {
+    position: relative;
+    background: var(--surface-2);
+    border-radius: 4px;
+    height: 12px;
+  }
+  .pr-track::before, .pr-track::after {
+    content: ''; position: absolute; top: -3px; bottom: -3px; width: 1px; background: var(--border);
+  }
+  .pr-fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 4px; }
+  .pr-days { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 0.78rem; color: var(--ink); text-align: right; }
+  .pr-legend { display: flex; gap: 1.4rem; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px dashed var(--border); flex-wrap: wrap; }
+  .pr-legend .item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.76rem; color: var(--ink-2); }
+  .pr-legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
+
+  .sec-list { display: flex; flex-direction: column; gap: 0.7rem; }
+  .sec-row {
+    display: grid;
+    grid-template-columns: 20px 1fr auto;
+    gap: 0.7rem;
+    align-items: start;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .sec-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .sec-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 0.3rem; }
+  .sec-title { font-size: 0.86rem; color: var(--ink); font-weight: 600; }
+  .sec-body { font-size: 0.79rem; color: var(--ink-2); margin-top: 0.15rem; }
+  .sec-when { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); white-space: nowrap; }
+
+  .advice-panel {
+    background: var(--rust-soft);
+    border: 1px solid var(--rust);
+    border-left-width: 4px;
+    border-radius: 10px;
+    padding: 1.5rem 1.6rem;
+  }
+  .advice-panel h2 { margin-bottom: 0.3rem; }
+  .advice-lede { font-size: 0.85rem; color: var(--ink-2); margin: 0 0 1.1rem; }
+  ol.advice-list {
+    list-style: none;
+    counter-reset: advice;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0.9rem;
+  }
+  ol.advice-list li {
+    counter-increment: advice;
+    display: grid;
+    grid-template-columns: 1.9rem 1fr;
+    gap: 0.7rem;
+  }
+  ol.advice-list li::before {
+    content: counter(advice);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--rust);
+    background: var(--surface);
+    border: 1px solid var(--rust);
+    border-radius: 50%;
+    width: 1.9rem; height: 1.9rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .advice-title { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+  .advice-body { font-size: 0.82rem; color: var(--ink-2); margin-top: 0.15rem; }
+  .warn-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--critical);
+    background: var(--critical-soft);
+    border: 1px solid var(--critical);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    margin-left: 0.5rem;
+  }
+  .new-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    margin-left: 0.5rem;
+  }
+
+  footer.brief-foot {
+    margin-top: 2.6rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-3);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 720px) {
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .comp-row, .pr-row, .scale-axis { grid-template-columns: 110px 1fr 46px; }
+    .pr-label { white-space: normal; }
+    .sec-row { grid-template-columns: 16px 1fr; }
+    .sec-when { grid-column: 2; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="brief-head">
+    <div>
+      <p class="eyebrow">Catch-Up Briefing</p>
+      <h1>One RSVP due today, a new PR to look at, and the same 10-strong stale backlog.</h1>
+      <p class="subhead">The hotel &amp; hospitality expo wraps up tonight and still needs an RSVP. Inbox is flat at ~201 unread for the second straight week — nothing to reply to. On oalsuhail/-B, PR #13 just crossed the 45-day stale line and a fresh, unreviewed PR (#23) landed since last week's check.</p>
+    </div>
+    <div class="head-meta">
+      <strong>Thursday, Sep 17 2026</strong>
+      oalsuhail@gmail.com<br>oalsuhail/-B
+    </div>
+  </header>
+
+  <div class="stat-row">
+    <div class="stat-tile">
+      <div class="stat-label"><span class="dot" style="background:var(--warning)"></span>Meetings, next 7 days</div>
+      <div class="stat-value">1</div>
+      <div class="stat-caption">Hotel &amp; Hospitality Expo — final day, today. RSVP still unanswered.</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-label"><span class="dot" style="background:var(--good)"></span>Emails needing action</div>
+      <div class="stat-value">0 <span style="font-size:1rem;color:var(--ink-3)">/ ~201</span></div>
+      <div class="stat-caption">Unread count is unchanged from last week's ~201 — still all newsletters/notices.</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-label"><span class="dot" style="background:var(--ink-3)"></span>Messages needing reply</div>
+      <div class="stat-value">—</div>
+      <div class="stat-caption">No chat workspace connected to check.</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-label"><span class="dot" style="background:var(--critical)"></span>Open PRs, oalsuhail/-B</div>
+      <div class="stat-value">12</div>
+      <div class="stat-caption">Oldest is 124 days old; 10 of 12 are past the 45-day stale line — up from 9 last week.</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <h2>Schedule</h2>
+      <span class="section-note">next 7 days</span>
+    </div>
+    <div class="panel">
+      <div class="sec-list">
+        <div class="sec-row">
+          <span class="sec-dot" style="background:var(--warning)"></span>
+          <div>
+            <div class="sec-title">Hotel &amp; Hospitality Expo — final day<span class="warn-tag">RSVP needed</span></div>
+            <div class="sec-body">Recurring 3-day event (Sep 15–17), organized by alsuhail2@gmail.com — today is the last day. Visitor badge is under "Abdulaziz Alsuhail — CEO, ALTATWEER Consulting Engineers." Description notes 4–10pm daily; the calendar entry itself runs 13:00–19:00 Riyadh — worth a quick check with the organizer on which window is current. Professionals-only entry, 18+.</div>
+          </div>
+          <span class="sec-when">Today, Sep 17</span>
+        </div>
+        <div class="sec-row">
+          <span class="sec-dot" style="background:var(--accent)"></span>
+          <div>
+            <div class="sec-title">Self-reminder: job-application follow-up</div>
+            <div class="sec-body">Two weeks post-submission check-in you scheduled yourself: review the tracking sheet, send polite follow-ups to any listings with a contact email, and update the status column (submitted / awaiting reply / interview / rejected / accepted).</div>
+          </div>
+          <span class="sec-when">Thu, Sep 24</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Important emails</h2>
+      <span class="section-note">unread, flagged or aging</span>
+    </div>
+    <div class="panel">
+      <div class="sec-list">
+        <div class="sec-row">
+          <span class="sec-dot" style="background:var(--warning)"></span>
+          <div>
+            <div class="sec-title">Google sign-in security alert — unread</div>
+            <div class="sec-body">"New sign-in to your account" notice, six days unread. Worth a 20-second check that the device/location match one of yours; if not, secure the account now.</div>
+          </div>
+          <span class="sec-when">Sep 11</span>
+        </div>
+        <div class="sec-row">
+          <span class="sec-dot" style="background:var(--ink-3)"></span>
+          <div>
+            <div class="sec-title">Salla review request still open</div>
+            <div class="sec-body">Post-order feedback request, now four weeks unread — the same item flagged last week, still untouched.</div>
+          </div>
+          <span class="sec-when">Aug 21</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Inbox signal</h2>
+      <span class="section-note">5 new since last check · ~201 unread total</span>
+    </div>
+    <div class="panel">
+      <div class="comp-chart">
+        <div class="comp-row">
+          <span class="comp-name">Newsletters &amp; product updates</span>
+          <div class="comp-track"><div class="comp-fill" style="width:60%; background:var(--accent)"></div></div>
+          <span class="comp-count">3</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-name">Platform / account notices</span>
+          <div class="comp-track"><div class="comp-fill" style="width:20%; background:var(--rust)"></div></div>
+          <span class="comp-count">1</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-name">Marketing / promo</span>
+          <div class="comp-track"><div class="comp-fill" style="width:20%; background:var(--ink-3)"></div></div>
+          <span class="comp-count">1</span>
+        </div>
+      </div>
+      <p class="comp-footnote">
+        Five new messages arrived in the last week (Justyn AI ×2, Sakana AI product update, an Emergent.sh promo, and the Google sign-in alert above) — none reply-worthy. Total unread hasn't moved from ~201 in a week, confirming this inbox is safe to batch-triage rather than checked daily.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Project debt clock</h2>
+      <span class="section-note">oalsuhail/-B · days open</span>
+    </div>
+    <div class="panel">
+      <div class="scale-axis">
+        <span></span>
+        <div class="scale-ticks">
+          <span style="left:0%">0</span>
+          <span style="left:25%">31d</span>
+          <span style="left:50%">62d</span>
+          <span style="left:75%">93d</span>
+          <span style="left:100%; transform:translateX(-100%)">124d+</span>
+        </div>
+        <span></span>
+      </div>
+      <div class="pr-chart">
+        <div class="pr-row"><span class="pr-label"><span class="num">#1</span>Optimize chat sessions</span><div class="pr-track"><div class="pr-fill" style="width:100%; background:var(--critical)"></div></div><span class="pr-days">124d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#2</span>CLAUDE.md knowledge base</span><div class="pr-track"><div class="pr-fill" style="width:100%; background:var(--critical)"></div></div><span class="pr-days">124d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#3</span>RTK hook config</span><div class="pr-track"><div class="pr-fill" style="width:98%; background:var(--critical)"></div></div><span class="pr-days">122d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#4</span>Routines tabbed view</span><div class="pr-track"><div class="pr-fill" style="width:97%; background:var(--critical)"></div></div><span class="pr-days">120d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#5</span>shadcn/ui + Tailwind</span><div class="pr-track"><div class="pr-fill" style="width:97%; background:var(--critical)"></div></div><span class="pr-days">120d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#7</span>graphify repository</span><div class="pr-track"><div class="pr-fill" style="width:81%; background:var(--critical)"></div></div><span class="pr-days">100d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#8</span>21st.dev Magic MCP config</span><div class="pr-track"><div class="pr-fill" style="width:81%; background:var(--critical)"></div></div><span class="pr-days">100d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#10</span>scientific-agent-skills</span><div class="pr-track"><div class="pr-fill" style="width:64%; background:var(--critical)"></div></div><span class="pr-days">79d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#11</span>investment research dashboard</span><div class="pr-track"><div class="pr-fill" style="width:64%; background:var(--critical)"></div></div><span class="pr-days">79d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#13</span>ABC Company website<span class="warn-tag" style="margin-left:0.4em">just crossed 45d</span></span><div class="pr-track"><div class="pr-fill" style="width:37%; background:var(--critical)"></div></div><span class="pr-days">46d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#16</span>scroll-world skill</span><div class="pr-track"><div class="pr-fill" style="width:32%; background:var(--warning)"></div></div><span class="pr-days">40d</span></div>
+        <div class="pr-row"><span class="pr-label"><span class="num">#23</span>Product/real-estate/support agents<span class="new-tag" style="margin-left:0.4em">new · unreviewed</span></span><div class="pr-track"><div class="pr-fill" style="width:2%; background:var(--good)"></div></div><span class="pr-days">3d</span></div>
+      </div>
+      <div class="pr-legend">
+        <span class="item"><span class="swatch" style="background:var(--good)"></span>fresh, &lt;14d</span>
+        <span class="item"><span class="swatch" style="background:var(--warning)"></span>aging, 14–45d</span>
+        <span class="item"><span class="swatch" style="background:var(--critical)"></span>stale, &gt;45d</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="advice-panel">
+    <h2>How to handle it</h2>
+    <p class="advice-lede">Only two things are actually time-sensitive today — the expo RSVP and the new PR. Everything else is the same backlog getting one week older.</p>
+    <ol class="advice-list">
+      <li>
+        <div>
+          <div class="advice-title">Respond to the expo invite<span class="warn-tag">today</span></div>
+          <div class="advice-body">It's the final day and your RSVP still shows "needs action." Confirm attendance (and the actual visiting hours with the organizer, since the description and the calendar entry disagree — 4–10pm vs. 13:00–19:00) before the day gets away.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="advice-title">Review PR #23 while it's fresh<span class="new-tag">new</span></div>
+          <div class="advice-body">Three new sellable/day-to-day agents (product-listing, real-estate, support-reply) landed 3 days ago with no review yet. Worth a quick look now — it's the one PR on this list still cheap to review, before it joins the stale pile.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="advice-title">#13 just tipped into "stale" — clear it or close it</div>
+          <div class="advice-body">The ABC Company website PR crossed the 45-day line this week. #16 (40d) is one week behind it. Both are still cheaper to resolve now than once they're buried in the 100+ day group.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="advice-title">Batch-triage the 10-PR stale backlog</div>
+          <div class="advice-body">#1, #2, #3, #4, #5, #7, #8, #10, #11, #13 are all past 45 days, five of them past 100. For each: merge if done and safe, close if it was exploratory (the graphify clone, the MCP config test), or leave one comment naming the blocker. This list hasn't shrunk in two consecutive weekly checks.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="advice-title">Keep inbox on a weekly batch, not daily</div>
+          <div class="advice-body">~201 unread, unchanged for a week, almost entirely newsletters. A once-a-week bulk archive/unsubscribe pass would keep it caught up without daily checking — except the Google sign-in alert and Salla request above, which are worth a direct look.</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <footer class="brief-foot">
+    <span>Sources: Gmail · Google Calendar · GitHub (oalsuhail/-B) · generated by Claude</span>
+    <span>Next run picks up wherever this leaves off</span>
+  </footer>
+
+</div>
+</body>
+</html>
