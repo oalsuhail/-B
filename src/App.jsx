@@ -1,21 +1,31 @@
+import { MotionConfig } from 'framer-motion'
+import Nav from './components/Nav'
+import Footer from './components/Footer'
 import Hero from './sections/Hero'
-import Features from './sections/Features'
-import Work from './sections/Work'
+import Services from './sections/Services'
+import Process from './sections/Process'
+import Projects from './sections/Projects'
+import WhyUs from './sections/WhyUs'
 import Testimonials from './sections/Testimonials'
 import CTA from './sections/CTA'
-import Nav from './components/Nav'
+import Contact from './sections/Contact'
 
 export default function App() {
   return (
-    <>
+    <MotionConfig reducedMotion="user">
+      <a href="#top" className="skip-link">Skip to content</a>
       <Nav />
       <main>
         <Hero />
-        <Features />
-        <Work />
+        <Services />
+        <Process />
+        <Projects />
+        <WhyUs />
         <Testimonials />
         <CTA />
+        <Contact />
       </main>
-    </>
+      <Footer />
+    </MotionConfig>
   )
 }
