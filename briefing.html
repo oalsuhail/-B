@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catch-up Briefing</title>
+<style>
+:root{--bg:#f5f6fa;--card:#fff;--ink:#14161f;--mut:#6b7280;--line:#e5e7eb;--red:#dc2626;--amb:#d97706;--grn:#16a34a;--blu:#2563eb}
+@media(prefers-color-scheme:dark){:root{--bg:#0d0f16;--card:#171a24;--ink:#eef0f6;--mut:#9aa3b2;--line:#262b38}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif;padding:24px 16px}
+main{max-width:1000px;margin:auto}h1{margin:0 0 4px;font-size:26px}.sub{color:var(--mut);margin-bottom:20px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-bottom:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.big{font-size:32px;font-weight:700}.lbl{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+h2{font-size:16px;margin:0 0 10px}.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;color:#fff}
+.r{background:var(--red)}.a{background:var(--amb)}.g{background:var(--grn)}.b{background:var(--blu)}
+.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin:4px 0 10px}.bar i{display:block;height:100%}
+ul{margin:0;padding-left:18px}li{margin:4px 0}.row{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+a{color:var(--blu)}
+</style></head><body><main>
+<h1>Catch-up Briefing</h1><div class="sub">Thursday, Oct 29, 2026 · Gmail · Calendar · GitHub</div>
+<div class="grid">
+<div class="card"><div class="lbl">Meetings (7d)</div><div class="big">0</div></div>
+<div class="card"><div class="lbl">Unread (7d)</div><div class="big">14</div></div>
+<div class="card"><div class="lbl">Need attention</div><div class="big" style="color:var(--red)">1</div></div>
+<div class="card"><div class="lbl">Open draft PRs</div><div class="big">12</div></div>
+</div>
+<div class="card" style="border-left:4px solid var(--red);margin-bottom:12px">
+<h2><span class="tag r">URGENT</span> Security: new iPhone sign-in on oalsuhail@gmail.com</h2>
+Google alert, Oct 24 15:28 UTC. Still unread 5 days later. Second iPhone sign-in alert in a month (previous one Sep 25, followed by a recovery-phone change).
+<p><b>Advice:</b> open <a href="https://myaccount.google.com/notifications">myaccount.google.com/notifications</a> now. If it wasn't you: change the password, sign out all devices, check recovery phone/email, enable passkey/2FA. If it was you, mark it as such.</p></div>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+<div class="card"><h2>Schedule</h2>Calendar is empty for the next 7 days. Good window for deep work and for clearing the PR backlog.</div>
+<div class="card"><h2>Inbox mix (14 unread)</h2>
+<div class="row"><span>Security</span><b>1</b></div><div class="bar"><i class="r" style="width:7%"></i></div>
+<div class="row"><span>Justyn AI masterclass promos</span><b>11</b></div><div class="bar"><i class="a" style="width:79%"></i></div>
+<div class="row"><span>Okara / Emergent newsletters</span><b>2</b></div><div class="bar"><i class="b" style="width:14%"></i></div>
+<p style="font-size:13px;color:var(--mut)">No personal or direct emails need a reply. The Justyn sale has ended, so those are safe to bulk-archive.</p></div>
+<div class="card"><h2>Messages needing reply</h2>None: no direct emails, and no chat workspace is connected.</div>
+<div class="card"><h2>Action items</h2><ul>
+<li><span class="tag r">Today</span> Verify the iPhone sign-in</li>
+<li><span class="tag a">This week</span> Triage stale PRs: 11 of 12 are over 45 days old (oldest #1/#2, 166d). Merge or close.</li>
+<li><span class="tag a">This week</span> #23 (AI agents) needs a real-API test run before merge</li>
+<li><span class="tag g">Low</span> Archive promo emails; unsubscribe from hello@justyn.ca</li></ul></div>
+</div>
+<div class="card" style="margin-top:12px"><h2>PR backlog age (days)</h2>
+<div class="row"><span>#1–#5 early drafts</span><b>166</b></div><div class="bar"><i class="r" style="width:100%"></i></div>
+<div class="row"><span>#7 graphify / #8 21st.dev MCP</span><b>142</b></div><div class="bar"><i class="r" style="width:87%"></i></div>
+<div class="row"><span>#10 science skills / #11 dashboard</span><b>121</b></div><div class="bar"><i class="r" style="width:74%"></i></div>
+<div class="row"><span>#13 ABC website</span><b>88</b></div><div class="bar"><i class="a" style="width:53%"></i></div>
+<div class="row"><span>#16 scroll-world</span><b>82</b></div><div class="bar"><i class="a" style="width:50%"></i></div>
+<div class="row"><span>#23 agents</span><b>45</b></div><div class="bar"><i class="g" style="width:26%"></i></div></div>
+<h2 style="margin-top:20px">How to handle it</h2>
+<div class="card"><ol><li>Spend 5 minutes on the security alert first.</li><li>Bulk-archive promos (<code>from:hello@justyn.ca</code>).</li><li>Use the empty calendar for one 30-minute PR triage: merge #13, #16, #23 if wanted; close the rest.</li></ol></div>
+</main></body></html>
