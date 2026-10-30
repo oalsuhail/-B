@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catch-up Briefing</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#14181f;--mut:#667085;--line:#e4e7ec;--red:#d92d20;--amb:#dc6803;--grn:#039855;--blu:#2e5bff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#171b22;--ink:#eef1f6;--mut:#98a2b3;--line:#262c36;--red:#f97066;--amb:#fdb022;--grn:#32d583;--blu:#7a9bff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif;padding:24px 16px}
+main{max-width:960px;margin:0 auto}h1{margin:0;font-size:26px}.sub{color:var(--mut);margin:4px 0 20px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.k{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.06em}.v{font-size:34px;font-weight:700;margin-top:4px}
+h2{font-size:16px;margin:0 0 10px}.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden;margin:6px 0 12px}
+.bar i{display:block;height:100%}.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;border:1px solid currentColor}
+ul{margin:0;padding-left:18px}li{margin:4px 0}.red{color:var(--red)}.amb{color:var(--amb)}.grn{color:var(--grn)}
+</style>
+</head>
+<body>
+<main>
+<h1>Catch-up Briefing</h1>
+<p class="sub">Friday, Oct 30, 2026 · Gmail, Calendar, GitHub (oalsuhail/-B)</p>
+
+<div class="grid">
+  <div class="card"><div class="k">Meetings, next 7 days</div><div class="v grn">0</div></div>
+  <div class="card"><div class="k">Unread, last 7 days</div><div class="v">12</div></div>
+  <div class="card"><div class="k">Needs action now</div><div class="v red">1</div></div>
+  <div class="card"><div class="k">Stale draft PRs (&gt;45d)</div><div class="v amb">12 / 12</div></div>
+</div>
+
+<div class="card" style="margin-bottom:12px">
+  <h2><span class="tag red">Urgent</span> Security alert, still unread</h2>
+  <p>Google reported a new sign-in on an Apple iPhone for oalsuhail@gmail.com on Oct 24, 15:28 UTC. It has sat unread for 6 days.</p>
+  <p><b>Advice:</b> Open Google "Check activity" today. If you don't recognise the iPhone, change the password, sign out all devices and review the recovery email (omarabdulaziz2002@gmail.com). If it was you, mark the alert read and move on.</p>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Schedule</h2>
+    <p>The calendar is empty for the next 7 days. This is a good week for deep work.</p>
+    <p><b>Advice:</b> Block two focus sessions: one to clear the PR backlog, one for your next project.</p>
+  </div>
+  <div class="card">
+    <h2>Emails</h2>
+    <div class="k">Mix of 12 unread</div>
+    <div class="bar"><i style="width:8%;background:var(--red);float:left"></i><i style="width:92%;background:var(--line);float:left"></i></div>
+    <ul><li><b>1</b> security alert (above)</li><li><b>10</b> promotions: a video-editing course sales sequence from justyn.ca</li><li><b>1</b> product update from ship.emergent.sh</li></ul>
+    <p><b>Advice:</b> Unsubscribe from the justyn.ca sequence and bulk-archive the rest. No replies are needed.</p>
+  </div>
+  <div class="card">
+    <h2>Messages</h2>
+    <p>No direct messages or mentions need a reply. No chat workspace is connected.</p>
+  </div>
+</div>
+
+<div class="card" style="margin-top:12px">
+  <h2>Action items: GitHub backlog</h2>
+  <div class="k">12 open non-briefing draft PRs, by age</div>
+  <div class="bar"><i style="width:100%;background:var(--amb)"></i></div>
+  <ul>
+    <li>All 12 are older than 45 days; the oldest, #1 and #2, date from May 16.</li>
+    <li>No open issues. 4 briefing PRs (#26 to #29) are open and superseded by this one.</li>
+    <li>Quick wins: #23 (three AR/EN agents) only needs a manual run with an API key; #11 (investment dashboard) and #13 (ABC website) are already verified.</li>
+  </ul>
+  <p><b>Advice:</b> Spend 30 minutes triaging. Merge #13 and #11 if you want them, close the experiments (#7 graphify, #8 MCP config, #10 skills) you no longer use, and close the old briefing PRs #26 to #28.</p>
+</div>
+</main>
+</body>
+</html>
