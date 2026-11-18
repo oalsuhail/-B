@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catch-up Briefing</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#111827;--mut:#6b7280;--line:#e5e7eb;--red:#dc2626;--amb:#d97706;--grn:#059669;--blu:#2563eb}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1020;--card:#141b2e;--ink:#e8ecf5;--mut:#8b95ad;--line:#26304a;--red:#f87171;--amb:#fbbf24;--grn:#34d399;--blu:#60a5fa}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif}
+.w{max-width:1040px;margin:0 auto;padding:24px 16px 48px}
+h1{margin:0;font-size:26px}.sub{color:var(--mut);margin:2px 0 20px}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.c{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.k{font-size:34px;font-weight:700;line-height:1}.l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
+h2{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin:26px 0 10px}
+.b{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;color:#fff}
+.r{background:var(--red)}.a{background:var(--amb)}.n{background:var(--mut)}
+.row{display:flex;gap:10px;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}
+.bar{height:10px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%}
+.adv{border-left:4px solid var(--blu)}ol{margin:6px 0 0;padding-left:20px}li{margin:4px 0}
+.m{color:var(--mut);font-size:13px}
+</style></head><body><div class="w">
+<h1>Catch-up Briefing</h1><div class="sub">Wednesday, 18 Nov 2026 · Gmail · Calendar · GitHub (oalsuhail/-B)</div>
+
+<div class="g">
+<div class="c"><div class="k" style="color:var(--red)">1</div><div class="l">Security alert</div></div>
+<div class="c"><div class="k">0</div><div class="l">Meetings · next 7 days</div></div>
+<div class="c"><div class="k">2</div><div class="l">Unread · last 3 days</div></div>
+<div class="c"><div class="k" style="color:var(--amb)">12</div><div class="l">Stale draft PRs (&gt;45d)</div></div>
+</div>
+
+<h2>1 · Schedule</h2>
+<div class="c"><b>Calendar is clear through 24 Nov.</b> <span class="m">No meetings, no prep needed — a good window for the cleanup below.</span></div>
+
+<h2>2 · Important emails</h2>
+<div class="c">
+<div class="row"><div><span class="b r">URGENT</span> <b>Security alert — new sign-in on Windows</b><div class="m">Google · 15 Nov 15:21 UTC · account oalsuhail@gmail.com. Unread for 3 days. Copy went to your recovery address (Omarabdulaziz2002@gmail.com). Earlier briefings flagged an unverified new-iPhone sign-in and recovery-phone change (Sep/Oct).</div></div></div>
+<div class="row"><div><span class="b n">LOW</span> <b>Promotion (1)</b><div class="m">Emergent "next prompt" credits offer, 15 Nov. Safe to archive/unsubscribe.</div></div></div>
+</div>
+<div class="c" style="margin-top:14px"><div class="l" style="margin:0">Unread mix</div>
+<div class="bar"><i style="width:50%;background:var(--red);float:left"></i><i style="width:0%;background:var(--amb);float:left"></i><i style="width:50%;background:var(--mut);float:left"></i></div>
+<div class="m" style="margin-top:6px">1 security · 1 promo (of 2)</div></div>
+
+<h2>3 · Messages needing a reply</h2>
+<div class="c m">No direct emails from people awaiting your reply. Chat workspace not connected.</div>
+
+<h2>4 · Action items</h2>
+<div class="c">
+<div class="row"><div><b>Verify the Windows sign-in</b> <span class="b r">today</span></div></div>
+<div class="row"><div><b>Triage 12 draft PRs</b> — all 65–185 days old; none merged. <span class="m">#23 (65d), #16, #13, #11, #10, #8, #7, #5, #4, #3, #2, #1 (186d)</span></div></div>
+<div class="row"><div><b>Close superseded briefing PRs</b> #26–#31 (six briefings, none reviewed)</div></div>
+<div class="row"><div><b>Unsubscribe</b> from Emergent</div></div>
+</div>
+<div class="c" style="margin-top:14px"><div class="l" style="margin:0">PR age (days)</div>
+<div class="m">#1 · 186</div><div class="bar"><i style="width:100%;background:var(--red)"></i></div>
+<div class="m">#11 · 141</div><div class="bar"><i style="width:76%;background:var(--red)"></i></div>
+<div class="m">#16 · 102</div><div class="bar"><i style="width:55%;background:var(--amb)"></i></div>
+<div class="m">#23 · 65</div><div class="bar"><i style="width:35%;background:var(--amb)"></i></div></div>
+
+<h2>5 · Advice</h2>
+<div class="c adv"><ol>
+<li><b>Security first (5 min):</b> open myaccount.google.com/notifications. If the Windows sign-in isn't yours, change the password, sign out all devices, and check recovery phone/email. If it is, mark it "yes, it was me".</li>
+<li><b>Turn on a passkey or authenticator 2-step</b> — repeated new-device alerts suggest the account is worth hardening.</li>
+<li><b>Batch the PR backlog in one 20-min pass:</b> merge what you want (#13 site, #23 agents), close the rest. Nothing older than 45 days is likely to be reviewed.</li>
+<li><b>Stop the daily briefing PRs piling up</b> — keep only the newest, or switch to weekly.</li>
+<li><b>Archive promos</b> with a filter so the inbox only shows what matters.</li>
+</ol></div>
+</div></body></html>
